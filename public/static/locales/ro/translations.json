@@ -1,0 +1,102 @@
+{
+  "BuildVersion": "v",
+  "RowsOf": "din",
+  "RowsPerPage": "Randuri pe pagina",
+  "MyProfile": "Profilul meu",
+  "Forbidden": "Nu aveti dreptul sa vedeti aceasta pagina!",
+  "NavBar": {
+    "Welcome": "Bun venit",
+    "Conferences": "Conferinte",
+    "Settings": "Setari",
+    "Privacy": "Confidentialitate",
+    "Security": "Securitate"
+  },
+  "Tooltips": {
+    "Logout": "Iesire",
+    "HidePassword": "Ascunde parola",
+    "ShowPassword": "Arata parola"
+  },
+  "Dialog": {
+    "Yes": "Da",
+    "No": "Nu"
+  },
+  "DateTime": {
+    "InvalidDateMessage": "Formatul datei este invalid",
+    "MinDateMessage": "Data introdusa nu poate fi mai mica decat valoarea minima",
+    "MaxDateMessage": "Data introdusa nu poate fi mai mare decat valoarea maxima"
+  },
+  "Validations": {
+    "Cnp": "CNP-ul nu este valid",
+    "UniqueCnp": "CNP-ul nu este unic",
+    "Phone": "Numarul de telefon nu este valid",
+    "NoSpace": "Nu poate incepe cu spatiu",
+    "Integer": "Valoarea trebuie sa fie un numar intreg",
+    "Generic": {
+      "Mandatory": "Valoarea este obligatorie",
+      "AtLeastOne": "Trebuie sa existe cel putin un element",
+      "Regex": "Valoarea are un format invalid",
+      "Email": "Valoarea nu este o adresa de email valida",
+      "OutOfRange": "Valoarea trebuie sa fie intre {{min}} si {{max}}",
+      "Greater": "Valoarea trebuie sa fie mai mare decat {{min}}",
+      "GreaterOrEqual": "Valoarea trebuie sa fie mai mare sau egala cu {{min}}",
+      "Less": "Valoarea trebuie sa fie mai mica decat {{max}}",
+      "LessOrEqual": "Valoarea trebuie sa fie mai mica sau egala cu {{max}}",
+      "MaxCharacters": "Lungimea trebuie sa fie mai mica decat {{max}}",
+      "MinCharacters": "Lungimea trebuie sa fie mai mare decat {{min}}",
+      "Unique": "Valoarea pentru {{selector}} trebuie sa fie unica"
+    }
+  },
+  "LandingPage": {
+    "Title": "Bun venit!",
+    "Subtitle": "Te rog introdu email-ul personal:",
+    "BadEmail": "Acesta nu este un email valid!"
+  },
+  "Conferences": {
+    "Speaker": "Orator: ",
+    "Attend": "Participa",
+    "Join": "Inscrie-te",
+    "Withdraw": "Retrage-te",
+    "StatusNotSet": "Nu participi",
+    "Edit": "Editeaza",
+    "Delete": "Sterge",
+    "Filters": {
+      "StartDate": "Data incepere",
+      "EndDate": "Data terminare"
+    }
+  },
+  "Conference": {
+    "Info": "Informatii conferinta",
+    "Location": "Locatie",
+    "Speakers": "Oratori",
+    "Name": "Nume conferinta",
+    "StartDate": "Data inceput",
+    "EndDate": "Data sfarsit",
+    "Type": "Tipul conferintei",
+    "Category": "Categorie"
+  },
+  "Location": {
+    "Name": "Nume",
+    "Address": "Adresa",
+    "Country": "Tara",
+    "County": "Judet",
+    "City": "Oras",
+    "Latitude": "Latitudine",
+    "Longitude": "Longitudine"
+  },
+  "Speaker": {
+    "Name": "Nume",
+    "Nationality": "Nationalitate",
+    "Rating": "Rating",
+    "MainSpeaker": "Orator principal"
+  },
+  "General": {
+    "Buttons": {
+      "ApplyFilters": "Aplica filtre",
+      "ResetFilters": "Reseteaza filtre",
+      "AddConference": "Adauga conferinta",
+      "Save": "Salveaza",
+      "AddSpeaker": "Adauga orator",
+      "DeleteSpeaker": "Sterge orator"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "@totalsoft/generator-webapp-rocket": {
+    "__TIMESTAMP__": "19.08.2024, 14:09:07",
+    "__VERSION__": "4.1.6",
+    "projectDescriptionName": "New Project",
+    "gqlAddress": "localhost:4000",
+    "withSubscription": false,
+    "theme": "orange",
+    "addHelm": false,
+    "withRights": false,
+    "withMultiTenancy": false,
+    "addQuickStart": false,
+    "packageManager": "npm"
+  }
+}

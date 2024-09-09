@@ -1,0 +1,110 @@
+{
+  "BuildVersion": "v",
+  "RowsOf": "of",
+  "RowsPerPage": "Rows per page",
+  "DATE": "{{date,intlDate}}",
+  "LONG_DATE": "{{date,intlLongDate}}",
+  "DATE_FORMAT": "{{date, format}}",
+  "TIME_FROM_X": "{{date,intlTimeFromX}}",
+  "H_FROM_X": "{{date,intlHoursFromX}}",
+  "NUMBER": "{{number,intlNumber}}",
+  "DECIMAL": "{{number,intlDecimal}}",
+  "DECIMAL2": "{{number,intlDecimal2}}",
+  "MyProfile": "My Profile",
+  "Forbidden": "Not allowed to see this page!",
+  "NavBar": {
+    "Welcome": "Welcome",
+    "Conferences": "Conferences",
+    "Settings": "Settings",
+    "Privacy": "Privacy",
+    "Security": "Security"
+  },
+  "Tooltips": {
+    "Logout": "Logout",
+    "HidePassword": "Hide password",
+    "ShowPassword": "Show password"
+  },
+  "Dialog": {
+    "Yes": "Yes",
+    "No": "No"
+  },
+  "DateTime": {
+    "InvalidDateMessage": "Invalid Date Format",
+    "MinDateMessage": "Date should not be before minimal date",
+    "MaxDateMessage": "Date should not be after maximal date"
+  },
+  "Validations": {
+    "Cnp": "The value is not a valid identifier number",
+    "UniqueCnp": "The identifier number is not unique",
+    "Phone": "The value is not a valid phone number",
+    "NoSpace": "Can not begin with space",
+    "Integer": "The value must be an integer",
+    "Generic": {
+      "Mandatory": "The value is mandatory",
+      "AtLeastOne": "There should be at least one item",
+      "Regex": "The value has an invalid format",
+      "Email": "The value is not a valid email address",
+      "OutOfRange": "The value must be between {{min}} and {{max}}",
+      "Greater": "The value must be greater than {{min}}",
+      "GreaterOrEqual": "The value must be greater than or equal to{{min}}",
+      "Less": "The value must be less than {{max}}",
+      "LessOrEqual": "The value must be less than or equal to {{max}}",
+      "MaxCharacters": "The length must be less than {{max}}",
+      "MinCharacters": "The length must be greater than {{min}}",
+      "Unique": "The value of {{selector}} must be unique"
+    }
+  },
+  "LandingPage": {
+    "Title": "Welcome!",
+    "Subtitle": "Please enter your email:",
+    "BadEmail": "This is not a valid email!"
+  },
+  "Conferences": {
+    "Speaker": "Speaker: ",
+    "Attend": "Attend",
+    "Join": "Join",
+    "Withdraw": "Withdraw",
+    "StatusNotSet": "Not attending",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Filters": {
+      "StartDate": "Start date",
+      "EndDate": "End date"
+    }
+  },
+  "Conference": {
+    "Info": "Conference info",
+    "Location": "Location",
+    "Speakers": "Speakers",
+    "Name": "Conference name",
+    "StartDate": "Start date",
+    "EndDate": "End date",
+    "Type": "Conference type",
+    "Category": "Category"
+  },
+  "Location": {
+    "Name": "Name",
+    "Address": "Address",
+    "Country": "Country",
+    "County": "County",
+    "City": "City",
+    "Latitude": "Latitude",
+    "Longitude": "Longitude"
+  },
+  "Speaker": {
+    "Name": "Name",
+    "Nationality": "Nationality",
+    "Rating": "Rating",
+    "MainSpeaker": "Main Speaker"
+  },
+  "General": {
+    "Buttons": {
+      "ApplyFilters": "Apply filters",
+      "ResetFilters": "Reset filters",
+      "AddConference": "Add conference",
+      "Save": "Save",
+      "AddSpeaker": "Add speaker",
+      "DeleteSpeaker": "Delete speaker"
+    }
+  }
+}

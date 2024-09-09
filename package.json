@@ -1,0 +1,119 @@
+{
+  "name": "Conference-App",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=16.x",
+    "npm": ">= 8.x"
+  },
+  "description": "•\tVisual Studio Code: https://code.visualstudio.com/download<br> •\tGit: https://git-scm.com/download/win <br> •\tGit Extensions: https://github.com/gitextensions/gitextensions/releases <br> •\tNode.js: https://nodejs.org/en/download/",
+  "main": "config-overrides.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "prestart": "node setOidcDomains.js",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "test:ci": "cross-env CI=true npm test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura --coverageReporters=lcov --coverageReporters=html",
+    "eject": "react-scripts eject",
+    "eslint:report": "eslint --fix --ext .js .",
+    "prettier": "prettier --write **/*.js",
+    "prepack": "husky install",
+    "postinstall": "node ./node_modules/@axa-fr/oidc-client/bin/copy-service-worker-files.mjs public"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.11.2",
+    "@axa-fr/react-oidc": "7.22.21",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.6",
+    "@mui/material": "^5.16.6",
+    "@totalsoft/rocket-ui": "^0.1.56",
+    "@totalsoft/change-tracking-react": "^5.0.37",
+    "@totalsoft/pure-validations-react": "^5.0.37",
+    "@totalsoft/rules-algebra-react": "^5.0.37",
+    "@totalsoft/validations": "^1.0.5",
+    "apollo-link-mock": "^1.0.1",
+    "date-fns": "^3.6.0",
+    "file-saver": "^2.0.5",
+    "graphql": "^16.9.0",
+    "i18next": "^23.12.2",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next-http-backend": "^2.5.2",
+    "oidc-client": "^1.11.5",
+    "omit-deep-lodash": "^1.1.7",
+    "ramda": "^0.30.1",
+    "react": "^18.3.1",
+    "react-country-flag": "3.1.0",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.0.0",
+    "react-responsive": "^10.0.0",
+    "react-router-dom": "^6.26.0",
+    "react-scripts": "^5.0.1",
+    "react-super-responsive-table": "^5.2.3",
+    "simplebar-react": "^3.2.6",
+    "tss-react": "^4.9.12",
+    "url-search-params-polyfill": "^8.2.5",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/plugin-proposal-pipeline-operator": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "cross-env": "^7.0.3",
+    "customize-cra": "^1.0.0",
+    "eslint-plugin-jest": "27.9.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "husky": "^9.1.4",
+    "jest-junit": "^16.0.0",
+    "mini-css-extract-plugin": "2.9.0",
+    "prettier": "^3.3.3",
+    "react-app-rewired": "^2.2.1",
+    "react-error-overlay": "6.0.11"
+  },
+  "lint-staged": {
+    "**/*.+(js|md|css|graphql|json)": "prettier --write"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-pipeline-operator",
+        {
+          "proposal": "minimal"
+        }
+      ]
+    ]
+  }
+}
