@@ -18,6 +18,15 @@ const Fragments = {
       isMainSpeaker
     }
   `,
+   detailedSpeaker: gql`
+   fragment detailedSpeaker on Speaker {
+     id
+     name
+     nationality
+     isMainSpeaker
+     rating
+   }
+    `,
 
   location: gql`
     fragment location on Location {
@@ -35,6 +44,27 @@ const Fragments = {
       }
     }
   `,
+    detailedLocation: gql`
+    fragment detailedLocation on Speaker {
+      id
+      name
+      address
+      city{
+        id
+        name
+      }
+      county{
+        id
+        name
+      }
+      country{
+        id
+        name
+      }
+      latitude
+      longitude
+    }
+     `,
 
   type: gql`
     fragment type on Type {
