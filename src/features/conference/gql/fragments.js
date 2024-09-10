@@ -7,6 +7,7 @@ const Fragments = {
       name
       startDate
       endDate
+      organizerEmail
     }
   `,
 

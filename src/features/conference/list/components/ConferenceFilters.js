@@ -26,10 +26,10 @@ const ConferenceFilters = props => {
       <Card icon={SearchIcon} iconColor='secondary'>
         <Grid container spacing={2} onKeyDown={handleKeyPressed}>
           <Grid item xs={12} lg={3}>
-            <DateTime label={t('Conferences.Filters.StartDate')} isClearable value={startDate} onChange={setStartDate} />
+            <DateTime label={t('Conferences.Filters.StartDate')} showPicker='dateTime' isClearable value={startDate} onChange={setStartDate} />
           </Grid>
           <Grid item xs={12} lg={3}>
-            <DateTime label={t('Conferences.Filters.EndDate')} isClearable value={endDate} onChange={setEndDate} />
+            <DateTime label={t('Conferences.Filters.EndDate')} showPicker='dateTime' isClearable value={endDate} onChange={setEndDate} />
           </Grid>
         </Grid>
       </Card>
