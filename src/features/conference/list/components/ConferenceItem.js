@@ -16,7 +16,7 @@ const ConferenceItem = props => {
 
   const handleEdit = useCallback(() => navigate(`/conferences/${id}`), [navigate, id])
 
-  const title = email.toUpperCase() === organizerEmail.toUpperCase() ? <ConferenceTitle title={name} onEdit={handleEdit} /> : name
+  const title = email?.toUpperCase() === organizerEmail?.toUpperCase() ? <ConferenceTitle title={name} onEdit={handleEdit} /> : name
 
   return (
     <Card title={title} subheader={<ConferenceSubtitle speaker={speaker} location={location} />}>

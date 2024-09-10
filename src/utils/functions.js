@@ -58,8 +58,10 @@ export const getOidcConfigName = () => {
 export const validateEmail = email => validEmailRegEx.test(email)
 
 export const generateDefaultFilters = () => {
-  const startDate = new Date()
-  const endDate = addDays(2, startDate)
+  // const startDate = new Date()
+  // const endDate = addDays(2, startDate)
+  const startDate = null
+  const endDate = null
   return {
     startDate,
     endDate
