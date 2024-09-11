@@ -6,7 +6,7 @@ import { Autocomplete, TextField } from '@totalsoft/rocket-ui'
 
 const ConferenceLocation = props => {
   const { countries, counties, cities, location, dispatch } = props
-  const { name, address, country, county, city, latitude, longitude } = location
+  const { name, address, country, county, city, latitude, longitude } = location || {}
   const { t } = useTranslation()
 
   const handleDispatch = actionType => value => dispatch({ type: actionType, payload: value })

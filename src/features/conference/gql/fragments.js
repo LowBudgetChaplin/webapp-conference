@@ -45,7 +45,7 @@ const Fragments = {
     }
   `,
     detailedLocation: gql`
-    fragment detailedLocation on Speaker {
+    fragment detailedLocation on Location {
       id
       name
       address
