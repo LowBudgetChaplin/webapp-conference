@@ -105,6 +105,7 @@
       "Save": "Save",
       "AddSpeaker": "Add speaker",
       "DeleteSpeaker": "Delete speaker"
-    }
+    },
+    "SavingSucceeded": "Saving succeeded!"
   }
 }

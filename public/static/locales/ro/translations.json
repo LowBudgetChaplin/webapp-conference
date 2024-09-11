@@ -97,6 +97,7 @@
       "Save": "Salveaza",
       "AddSpeaker": "Adauga orator",
       "DeleteSpeaker": "Sterge orator"
-    }
+    },
+    "SavingSucceeded": "Salvarea a reusit!"
   }
 }

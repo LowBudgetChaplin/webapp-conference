@@ -1,20 +1,61 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHeader } from 'providers/AreasProvider'
 import ConferenceHeader from 'features/conference/ConferenceHeader'
 import Conference from './Conference'
-import { FakeText, IconButton } from '@totalsoft/rocket-ui'
+import { FakeText, IconButton, useToast } from '@totalsoft/rocket-ui'
 import { initialConference, reducer } from '../conferenceState'
-import { useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useMutation, useQuery } from '@apollo/client'
 import { CONFERENCE_QUERY } from 'features/conference/gql/queries'
+import { UPDATE_CONFERENCE } from 'features/conference/gql/mutations'
+import { useEmail } from 'hooks/useEmail'
 
 const ConferenceContainer = () => {
   const { t } = useTranslation()
   const { id } = useParams()
   const isNew = id === 'new'
   const [, setHeader] = useHeader()
+  const navigate = useNavigate()
   const [conference, dispatch] = useReducer(reducer, initialConference)
+  const addToast = useToast()
+  const [email] = useEmail()
+
+  const [saveConference] = useMutation(UPDATE_CONFERENCE, {
+    onCompleted: data => {
+      addToast(t('General.SavingSucceeded'), 'success')
+      if (isNew) {
+        navigate(`/conferences/${data?.saveConference?.id}`)
+        return
+      }
+      data?.saveConference && dispatch({ type: 'resetData', payload: data?.saveConference })
+    }
+  })
+
+  const handleSave = useCallback(() => {
+    const { id, name, startDate, endDate, deletedSpeakers, location, speakers, type, category } = conference
+    const { city, county, country, longitude, latitude, ...restLocation } = location
+    const input = {
+      id,
+      name,
+      startDate,
+      endDate,
+      organizerEmail: email,
+      typeId: type?.id,
+      categoryId: category?.id,
+      location: {
+        ...restLocation,
+        latitude: parseFloat(location.latitude),
+        longitude: parseFloat(location.longitude),
+        cityId: city.id,
+        countyId: county.id,
+        countryId: country.id
+      },
+      speakers,
+      deletedSpeakers
+    }
+    saveConference({ variables: { input } })
+  }, [conference, saveConference, email])
 
   const { loading, data } = useQuery(CONFERENCE_QUERY, {
     variables: { id: parseInt(id) || -1, isNew },
@@ -25,11 +66,13 @@ const ConferenceContainer = () => {
   useEffect(() => {
     setHeader(
       <ConferenceHeader
-        title={conference.name}
-        actions={<IconButton type='save' title={t('General.Buttons.Save')} sx={{ marginTop: '5px', marginRight: '3px' }} />}
+        title={conference?.name}
+        actions={
+          <IconButton type='save' title={t('General.Buttons.Save')} sx={{ marginTop: '5px', marginRight: '3px' }} onClick={handleSave} />
+        }
       />
     )
-  }, [conference.name, setHeader, t])
+  }, [conference?.name, handleSave, setHeader, t])
 
   if (loading) {
     return <FakeText lines={10} />
