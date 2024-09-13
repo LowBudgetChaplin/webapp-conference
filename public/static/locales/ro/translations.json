@@ -91,6 +91,7 @@
     "PhoneNumber": "Numar de telefon"
   },
   "General": {
+    "DeletingSucceeded": "Conferinta s-a sters cu succes",
     "Buttons": {
       "ApplyFilters": "Aplica filtre",
       "ResetFilters": "Reseteaza filtre",

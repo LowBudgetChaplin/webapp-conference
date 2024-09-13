@@ -32,3 +32,9 @@ export const CHANGE_ATTENDANCE_STATUS_MUTATION = gql`
     changeAttendanceStatus(input: $input)
   }
 `
+
+export const DELETE_CONFERENCE = gql`
+  mutation deleteConference($id: Int!) {
+    deleteConference(id: $id)
+  }
+`
