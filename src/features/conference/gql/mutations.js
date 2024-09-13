@@ -26,3 +26,9 @@ export const UPDATE_CONFERENCE = gql`
   ${Fragments.detailedLocation}
   ${Fragments.detailedSpeaker}
 `
+
+export const CHANGE_ATTENDANCE_STATUS_MUTATION = gql`
+  mutation changeAttendanceStatus($input: AttendanceInput!) {
+    changeAttendanceStatus(input: $input)
+  }
+`

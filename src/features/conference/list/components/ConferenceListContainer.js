@@ -8,9 +8,10 @@ import { useTranslation } from 'react-i18next'
 import { useHeader } from 'providers/AreasProvider'
 import ConferenceHeader from 'features/conference/ConferenceHeader'
 import { useNavigate } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { CONFERENCE_LIST_QUERY } from 'features/conference/gql/queries'
 import { useEmail } from 'hooks/useEmail'
+import { CHANGE_ATTENDANCE_STATUS_MUTATION } from 'features/conference/gql/mutations'
 
 const ConferenceListContainer = () => {
   const navigate = useNavigate()
@@ -34,8 +35,24 @@ const ConferenceListContainer = () => {
 
   const [filters, setFilters] = useState(generateDefaultFilters())
 
+  const [changeAttendanceStatus] = useMutation(CHANGE_ATTENDANCE_STATUS_MUTATION, {
+    refetchQueries: [{ query: CONFERENCE_LIST_QUERY, variables: { filters, userEmail: email } }]
+  })
+
+  const handleChangeAttendanceStatus = useCallback(
+    (conferenceId, statusId) => () => {
+      const input = {
+        attendeeEmail: email,
+        conferenceId,
+        statusId
+      }
+      changeAttendanceStatus({ variables: { input } })
+    },
+    [changeAttendanceStatus, email]
+  )
+
   //const { data, loading } = { data: conferences, loading: false } // don't worry about it! it will make a lot more sense after GraphQL
-  const {data, loading} = useQuery(CONFERENCE_LIST_QUERY, {variables: {filters, userEmail: email}})
+  const { data, loading } = useQuery(CONFERENCE_LIST_QUERY, { variables: { filters, userEmail: email } })
   const handleApplyFilters = useCallback(filters => setFilters(filters), [])
 
   if (loading) {
@@ -45,7 +62,7 @@ const ConferenceListContainer = () => {
   return (
     <>
       <ConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} />
-      <ConferenceList conferences={data?.conferenceList} />
+      <ConferenceList conferences={data?.conferenceList} onChangeAttendanceStatus={handleChangeAttendanceStatus} />
     </>
   )
 }

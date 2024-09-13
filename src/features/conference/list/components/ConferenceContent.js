@@ -6,7 +6,7 @@ import { Grid } from '@mui/material'
 import { Button, Typography } from '@totalsoft/rocket-ui'
 
 const ConferenceContent = props => {
-  const { conference } = props
+  const { conference, onChangeAttendanceStatus } = props
   const { status, startDate, endDate, type, category } = conference
 
   const { t } = useTranslation()
@@ -35,17 +35,27 @@ const ConferenceContent = props => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           {showJoin && (
-            <Button right color='success' size={'small'}>
+            <Button
+              right
+              color='success'
+              size={'small'}
+              onClick={onChangeAttendanceStatus(conference?.id, parseInt(attendeeStatus.Joined))}
+            >
               {t('Conferences.Join')}
             </Button>
           )}
           {showWithdraw && (
-            <Button right color='error' size={'small'}>
+            <Button
+              right
+              color='error'
+              size={'small'}
+              onClick={onChangeAttendanceStatus(conference?.id, parseInt(attendeeStatus.Withdrawn))}
+            >
               {t('Conferences.Withdraw')}
             </Button>
           )}
           {showAttend && (
-            <Button right color='info' size={'small'}>
+            <Button right color='info' size={'small'} onClick={onChangeAttendanceStatus(conference?.id, parseInt(attendeeStatus.Attended))}>
               {t('Conferences.Attend')}
             </Button>
           )}
@@ -56,7 +66,8 @@ const ConferenceContent = props => {
 }
 
 ConferenceContent.propTypes = {
-  conference: PropTypes.object.isRequired
+  conference: PropTypes.object.isRequired,
+  onChangeAttendanceStatus: PropTypes.func
 }
 
 export default ConferenceContent

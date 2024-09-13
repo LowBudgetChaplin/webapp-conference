@@ -8,7 +8,7 @@ import { initialConference, reducer } from '../conferenceState'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import { CONFERENCE_QUERY } from 'features/conference/gql/queries'
-import { UPDATE_CONFERENCE } from 'features/conference/gql/mutations'
+import { CHANGE_ATTENDANCE_STATUS_MUTATION, UPDATE_CONFERENCE } from 'features/conference/gql/mutations'
 import { useEmail } from 'hooks/useEmail'
 
 const ConferenceContainer = () => {
@@ -45,8 +45,8 @@ const ConferenceContainer = () => {
       categoryId: category?.id,
       location: {
         ...restLocation,
-        latitude: parseFloat(location.latitude),
-        longitude: parseFloat(location.longitude),
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
         cityId: city.id,
         countyId: county.id,
         countryId: country.id
