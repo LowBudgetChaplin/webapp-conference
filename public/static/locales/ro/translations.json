@@ -87,7 +87,8 @@
     "Name": "Nume",
     "Nationality": "Nationalitate",
     "Rating": "Rating",
-    "MainSpeaker": "Orator principal"
+    "MainSpeaker": "Orator principal",
+    "PhoneNumber": "Numar de telefon"
   },
   "General": {
     "Buttons": {
