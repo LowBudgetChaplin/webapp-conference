@@ -8,7 +8,7 @@ import { initialConference, reducer } from '../conferenceState'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import { CONFERENCE_QUERY } from 'features/conference/gql/queries'
-import { CHANGE_ATTENDANCE_STATUS_MUTATION, UPDATE_CONFERENCE } from 'features/conference/gql/mutations'
+import { UPDATE_CONFERENCE } from 'features/conference/gql/mutations'
 import { useEmail } from 'hooks/useEmail'
 
 const ConferenceContainer = () => {

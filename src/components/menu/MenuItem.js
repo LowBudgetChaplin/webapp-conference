@@ -61,7 +61,7 @@ MenuItem.propTypes = {
   isSubMenuItem: PropTypes.bool,
   subMenuOpen: PropTypes.bool,
   onToggleSubMenu: PropTypes.func,
-  withGradient: PropTypes.bool.isRequired
+  withGradient: PropTypes.bool
 }
 
 export default MenuItem

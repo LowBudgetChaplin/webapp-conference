@@ -35,7 +35,7 @@ MobileSidebar.propTypes = {
   closeDrawer: PropTypes.func.isRequired,
   brand: PropTypes.node.isRequired,
   changeLanguage: PropTypes.func.isRequired,
-  withGradient: PropTypes.bool.isRequired,
+  withGradient: PropTypes.bool,
   appVersion: PropTypes.node.isRequired
 }
 

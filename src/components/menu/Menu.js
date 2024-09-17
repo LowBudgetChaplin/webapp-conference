@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import MenuItem from './MenuItem'
@@ -28,7 +28,7 @@ function Menu({ drawerOpen, withGradient }) {
 
 Menu.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
-  withGradient: PropTypes.bool.isRequired
+  withGradient: PropTypes.bool
 }
 
 export default Menu

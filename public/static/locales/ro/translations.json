@@ -10,7 +10,8 @@
     "Settings": "Setari",
     "Privacy": "Confidentialitate",
     "Security": "Securitate",
-    "Conference": "Conferinta"
+    "UserConference": "Conferintele tale",
+    "Conference": "Conferintele tale"
   },
   "Tooltips": {
     "Logout": "Iesire",
@@ -74,7 +75,9 @@
     "StartDate": "Data inceput",
     "EndDate": "Data sfarsit",
     "Type": "Tipul conferintei",
-    "Category": "Categorie"
+    "Category": "Categorie",
+    "Finished": "Conferinta s-a terminat",
+    "Countdown" : "Conferinta incepe in"
   },
   "Location": {
     "Name": "Nume",

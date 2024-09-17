@@ -26,7 +26,7 @@ UserMenuItem.propTypes = {
   userMenu: PropTypes.object.isRequired,
   drawerOpen: PropTypes.bool.isRequired,
   activeRoute: PropTypes.func.isRequired,
-  withGradient: PropTypes.bool.isRequired
+  withGradient: PropTypes.bool
 }
 
 export default UserMenuItem

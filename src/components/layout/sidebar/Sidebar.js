@@ -47,7 +47,7 @@ Sidebar.propTypes = {
   changeLanguage: PropTypes.func.isRequired,
   logo: PropTypes.string,
   logoText: PropTypes.string,
-  withGradient: PropTypes.bool.isRequired
+  withGradient: PropTypes.bool
 }
 
 export default Sidebar

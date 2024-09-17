@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { Grid } from '@mui/material'
+import { Card, Grid } from '@mui/material'
 import { IconButton, Typography } from '@totalsoft/rocket-ui'
 import { emptyString } from 'utils/constants'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 const ConferenceTitle = props => {
   const { t } = useTranslation()
   const { title, onEdit, onDelete, id } = props
+  const navigate = useNavigate()
+
+  const seeConference = useCallback(() => navigate(`/conference/${id}`), [navigate, id])
 
   return (
+    // <Card
+    //   onClick={seeConference}
+    //   sx={{
+    //     cursor: 'pointer',
+    //     '&:hover': {
+    //       backgroundColor: 'rgba(0, 0, 0, 0.04)'
+    //     }
+    //   }}
+    // >
     <Grid container justifyContent='flex-start' alignItems='center'>
       <Grid item xs={9} sm={9} lg={9} container justifyContent='flex-start'>
         <Typography variant='subtitle1'>{title || emptyString}</Typography>
@@ -23,6 +36,7 @@ const ConferenceTitle = props => {
         </Grid>
       </Grid>
     </Grid>
+    // </Card>
   )
 }
 

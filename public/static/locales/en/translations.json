@@ -18,7 +18,8 @@
     "Settings": "Settings",
     "Privacy": "Privacy",
     "Security": "Security",
-    "Conference": "Conference"
+    "UserConference": "Your conferences",
+    "Conference": "Your conferences"
   },
   "Tooltips": {
     "Logout": "Logout",
@@ -82,7 +83,9 @@
     "StartDate": "Start date",
     "EndDate": "End date",
     "Type": "Conference type",
-    "Category": "Category"
+    "Category": "Category",
+    "Finished": "The conference is over",
+    "Countdown": "Countdown"
   },
   "Location": {
     "Name": "Name",

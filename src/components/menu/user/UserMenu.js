@@ -111,7 +111,7 @@ UserMenu.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
   changeLanguage: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
-  withGradient: PropTypes.bool.isRequired
+  withGradient: PropTypes.bool
 }
 
 export default UserMenu
