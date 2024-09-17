@@ -17,7 +17,8 @@
     "Conferences": "Conferences",
     "Settings": "Settings",
     "Privacy": "Privacy",
-    "Security": "Security"
+    "Security": "Security",
+    "Conference": "Conference"
   },
   "Tooltips": {
     "Logout": "Logout",
@@ -67,6 +68,7 @@
     "StatusNotSet": "Not attending",
     "Edit": "Edit",
     "Delete": "Delete",
+    "SearchBar": "Search for a conference",
     "Filters": {
       "StartDate": "Start date",
       "EndDate": "End date"
@@ -96,7 +98,8 @@
     "Nationality": "Nationality",
     "Rating": "Rating",
     "MainSpeaker": "Main Speaker",
-    "PhoneNumber": "Phone Number"
+    "PhoneNumber": "Phone Number",
+    "OrganizerEmail": "Email address"
   },
   "General": {
     "DeletingSucceeded": "Deleting succeeded",

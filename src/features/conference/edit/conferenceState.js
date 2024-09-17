@@ -47,6 +47,7 @@ export const reducer = (state, action) => {
           nationality: emptyString,
           rating: emptyString,
           phoneNumber: emptyString,
+          email: emptyString,
           isMainSpeaker: false
         }),
         state
@@ -58,6 +59,7 @@ export const reducer = (state, action) => {
     case 'rating':
     case 'isMainSpeaker':
     case 'phoneNumber':
+    case 'email':
       return modifyPath(['speakers', action.index, action.type], () => action.payload, state)
     case 'deleteSpeaker':
       return {

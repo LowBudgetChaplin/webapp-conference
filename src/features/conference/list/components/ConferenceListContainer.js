@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useMemo } from 'react'
 import ConferenceFilters from './ConferenceFilters'
-// import conferences from 'utils/mocks/conferences'
 import { FakeText, IconButton, useToast } from '@totalsoft/rocket-ui'
 import ConferenceList from './ConferenceList'
 import { generateDefaultFilters } from 'utils/functions'
@@ -18,22 +17,38 @@ const ConferenceListContainer = () => {
   const { t } = useTranslation()
   const [email] = useEmail()
   const addToast = useToast()
+  const [, setHeader] = useHeader()
+
   const handleAddClick = useCallback(() => {
     navigate('/conferences/new')
   }, [navigate])
 
-  const [, setHeader] = useHeader()
   useEffect(() => () => setHeader(null), [setHeader])
+
   useEffect(() => {
     setHeader(
       <ConferenceHeader
         title={t('NavBar.Conferences')}
-        actions={<IconButton type='add' key='addButton' title={t('General.Buttons.AddConference')} onClick={handleAddClick} />}
+        actions={
+          <IconButton
+            type='add'
+            key='addButton'
+            title={t('General.Buttons.AddConference')}
+            sx={{ marginTop: '5px', marginRight: '3px' }}
+            onClick={handleAddClick}
+          />
+        }
       />
     )
   }, [handleAddClick, setHeader, t])
 
   const [filters, setFilters] = useState(generateDefaultFilters())
+  const [search, setSearch] = useState('')
+
+  const { data, loading } = useQuery(CONFERENCE_LIST_QUERY, {
+    variables: { filters, userEmail: email },
+    fetchPolicy: 'cache-and-network'
+  })
 
   const [changeAttendanceStatus] = useMutation(CHANGE_ATTENDANCE_STATUS_MUTATION, {
     refetchQueries: [{ query: CONFERENCE_LIST_QUERY, variables: { filters, userEmail: email } }]
@@ -44,9 +59,12 @@ const ConferenceListContainer = () => {
     refetchQueries: [{ query: CONFERENCE_LIST_QUERY, variables: { filters, userEmail: email } }]
   })
 
-  const handleDelete = useCallback((id) => () =>{
-    deleteConference({ variables: { id } })
-  }, [deleteConference])
+  const handleDelete = useCallback(
+    id => () => {
+      deleteConference({ variables: { id } })
+    },
+    [deleteConference]
+  )
 
   const handleChangeAttendanceStatus = useCallback(
     (conferenceId, statusId) => () => {
@@ -60,18 +78,27 @@ const ConferenceListContainer = () => {
     [changeAttendanceStatus, email]
   )
 
-  //const { data, loading } = { data: conferences, loading: false } // don't worry about it! it will make a lot more sense after GraphQL
-  const { data, loading } = useQuery(CONFERENCE_LIST_QUERY, { variables: { filters, userEmail: email } })
-  const handleApplyFilters = useCallback(filters => setFilters(filters), [])
+  const handleApplyFilters = useCallback(newFilters => {
+    setFilters(newFilters)
+  }, [])
 
-  if (loading) {
+  const handleSearch = useCallback(info => {
+    setSearch(info)
+  }, [])
+
+  const filteredConferences = useMemo(() => {
+    if (!data?.conferenceList) return []
+    return data.conferenceList.filter(conference => conference.name.toLowerCase().includes(search.toLowerCase()))
+  }, [data?.conferenceList, search])
+
+  if (loading && !data) {
     return <FakeText lines={10} />
   }
 
   return (
     <>
-      <ConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} />
-      <ConferenceList conferences={data?.conferenceList} onChangeAttendanceStatus={handleChangeAttendanceStatus} onDelete={handleDelete}/>
+      <ConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} onSearch={handleSearch} />
+      <ConferenceList conferences={filteredConferences} onChangeAttendanceStatus={handleChangeAttendanceStatus} onDelete={handleDelete} />
     </>
   )
 }

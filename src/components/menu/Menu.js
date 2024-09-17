@@ -18,7 +18,7 @@ function Menu({ drawerOpen, withGradient }) {
           return menu.children ? (
             <CollapsibleMenuItem key={key} {...menuItemProps} />
           ) : (
-            <MenuItem key={key} {...menuItemProps} />
+            <MenuItem key={key} {...menuItemProps} withGradient={true} />
           )
         })}
       </List>

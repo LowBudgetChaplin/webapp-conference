@@ -2,14 +2,11 @@ import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import ConferenceSubtitle from './ConferenceSubtitle'
 import ConferenceContent from './ConferenceContent'
-import { Card, useToast } from '@totalsoft/rocket-ui'
+import { Card} from '@totalsoft/rocket-ui'
 import ConferenceTitle from './ConferenceTitle'
 import { useEmail } from 'hooks/useEmail'
 import { useNavigate } from 'react-router-dom'
-import { useMutation } from '@apollo/client'
-import { useTranslation } from 'react-i18next'
-import { DELETE_CONFERENCE } from 'features/conference/gql/mutations'
-import { CONFERENCE_LIST_QUERY } from 'features/conference/gql/queries'
+
 
 const ConferenceItem = props => {
   const { conference, onChangeAttendanceStatus, onDelete } = props

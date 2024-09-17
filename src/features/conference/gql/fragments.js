@@ -26,7 +26,7 @@ const Fragments = {
       isMainSpeaker
       rating
       phoneNumber
-
+      email
     }
   `,
 

@@ -20,7 +20,8 @@ const ConferenceList = props => {
 ConferenceList.propTypes = {
   conferences: PropTypes.array,
   onChangeAttendanceStatus: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  search: PropTypes.string
 }
 
 export default ConferenceList

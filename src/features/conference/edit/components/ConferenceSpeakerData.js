@@ -7,7 +7,7 @@ import { Td, TdCenteredButton, Tr } from 'components/common/dataDisplay/SuperRes
 
 const ConferenceSpeakerData = props => {
   const { speaker, dispatch, index } = props
-  const { name, nationality, rating, isMainSpeaker, phoneNumber } = speaker
+  const { name, nationality, rating, isMainSpeaker, phoneNumber, email } = speaker
   const { t } = useTranslation()
 
   const handleDispatch = actionType => value => dispatch({ type: actionType, payload: value, index })
@@ -29,6 +29,9 @@ const ConferenceSpeakerData = props => {
       </Td>
       <Td>
         <TextField fullWidth value={phoneNumber} onChange={handleDispatch('phoneNumber')} />
+      </Td>
+      <Td>
+        <TextField fullWidth value={email} onChange={handleDispatch('email')} />
       </Td>
       <TdCenteredButton>
         <Checkbox color='secondary' size='small' checked={isMainSpeaker} onChange={handleCheckboxDispatch} />
