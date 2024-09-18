@@ -56,7 +56,7 @@ const ConferenceDetails = () => {
         <Card>
           <CardMedia
             component='img'
-            image={image || 'https://via.placeholder.com/400'} // Placeholder image if conference image is not available
+            image={image || 'https://via.placeholder.com/400'}
             alt='Conference'
             style={{ height: 400, objectFit: 'cover' }}
           />
