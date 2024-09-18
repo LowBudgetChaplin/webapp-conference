@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
-import { Grid, Typography, Card, CardContent, CardMedia, Divider } from '@mui/material'
+import { useQuery, useMutation } from '@apollo/client'
+import { Grid, Typography, Card, CardContent, Divider, Icon } from '@mui/material'
 import PropTypes from 'prop-types'
-import { CONFERENCE_QUERY } from '../gql/queries'
 import { AccessTime, LocationOn, CalendarToday, Person, Alarm } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
+import axios from 'axios'
+import SunIcon from '@mui/icons-material/WbSunny'
+import CloudIcon from '@mui/icons-material/Cloud'
+import Rating from '@mui/material/Rating'
+import { UPDATE_RATING_MUTATION } from '../gql/mutations'
+import { CONFERENCE_QUERY } from '../gql/queries'
 
 const ConferenceDetails = () => {
   const { id } = useParams()
@@ -13,12 +18,33 @@ const ConferenceDetails = () => {
   const { data } = useQuery(CONFERENCE_QUERY, {
     variables: { id: parseInt(id, 10), isNew: false }
   })
-
+  const [updateRating] = useMutation(UPDATE_RATING_MUTATION)
+  const [weatherData, setWeatherData] = useState(null)
   const { conference } = data || {}
-  const { name, startDate, endDate, location, speakers, image } = conference || {}
+  const { name, startDate, endDate, location, speakers } = conference || {}
+  const { city } = location || {}
 
   const [timeLeft, setTimeLeft] = useState('')
   const [isConferenceOver, setIsConferenceOver] = useState(false)
+
+  const fetchData = async () => {
+    if (!location || !location.name) return
+
+    //process.env.WeatherAPI
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&units=metric&appid=e78e7e6c166fe48f5145ba410557cce1`
+      )
+      setWeatherData(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [location])
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -45,6 +71,18 @@ const ConferenceDetails = () => {
     return () => clearInterval(intervalId)
   }, [startDate, t])
 
+  const handleRatingChange = useCallback(
+    speakerId => (event, newValue) => {
+      updateRating({
+        variables: {
+          speakerId,
+          rating: newValue
+        }
+      })
+    },
+    [updateRating]
+  )
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -54,12 +92,28 @@ const ConferenceDetails = () => {
       </Grid>
       <Grid item xs={12} md={6}>
         <Card>
-          <CardMedia
-            component='img'
-            image={image || 'https://via.placeholder.com/400'}
-            alt='Conference'
-            style={{ height: 400, objectFit: 'cover' }}
-          />
+          <CardContent style={{ height: 400, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Typography variant='h4' gutterBottom>
+              {t('Conference.Weather')} {city?.name || 'Not Specified'}
+            </Typography>
+            {weatherData ? (
+              <>
+                <Icon sx={{ fontSize: '100px', marginBottom: '30px' }}>
+                  {weatherData.weather[0].main === 'Clear' ? (
+                    <SunIcon sx={{ color: 'gold', fontSize: 'inherit' }} />
+                  ) : (
+                    <CloudIcon sx={{ color: 'gray', fontSize: 'inherit' }} />
+                  )}
+                </Icon>
+                <Typography variant='h4' style={{ fontSize: '5rem' }}>
+                  {weatherData.main.temp}°C
+                </Typography>
+                <Typography variant='h6'>{weatherData.weather[0].description}</Typography>
+              </>
+            ) : (
+              <Typography variant='body2'>Loading weather...</Typography>
+            )}
+          </CardContent>
         </Card>
       </Grid>
       <Grid item xs={12} md={6}>
@@ -90,20 +144,21 @@ const ConferenceDetails = () => {
           <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom style={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant='h6' gutterBottom style={{ display: 'flex', alignItems: 'center', fontFamily: 'monospace' }}>
                   <LocationOn style={{ marginRight: 8 }} /> {t('Conference.Location')}
                 </Typography>
-                <Typography variant='body2'>{location?.name || 'Not Specified'}</Typography>
+                <Typography variant='body2'>{city?.name || 'Not Specified'}</Typography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} md={6}>
             <Card>
-              <CardContent>
+              <CardContent style={{ minWidth: '400px' }}>
+                {' '}
                 <Typography variant='h6' gutterBottom style={{ display: 'flex', alignItems: 'center' }}>
                   <Alarm style={{ marginRight: 8 }} /> {t('Conference.Countdown')}
                 </Typography>
-                <Typography variant='body2' style={{ fontFamily: 'monospace', fontSize: '1.25rem' }}>
+                <Typography variant='body2' style={{ fontFamily: 'monospace', fontSize: '1rem' }}>
                   {timeLeft}
                 </Typography>
               </CardContent>
@@ -121,8 +176,25 @@ const ConferenceDetails = () => {
                 <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                   {speakers &&
                     speakers.map(speaker => (
-                      <li key={speaker.id} style={{ borderBottom: '1px solid #ccc', padding: '8px 0', fontSize: '0.875rem' }}>
+                      <li
+                        key={speaker.id}
+                        style={{
+                          borderBottom: '1px solid #ccc',
+                          padding: '8px 0',
+                          fontSize: '0.875rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between'
+                        }}
+                      >
                         <Typography variant='body2'>{speaker.name}</Typography>
+                        <Rating
+                          name={`rating-${speaker.id}`}
+                          value={speaker.rating || 0}
+                          precision={0.5}
+                          onChange={handleRatingChange(speaker.id)}
+                          sx={{ color: 'gold', fontSize: '1.5rem' }}
+                        />
                       </li>
                     ))}
                 </ul>

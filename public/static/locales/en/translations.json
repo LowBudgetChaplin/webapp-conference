@@ -85,7 +85,8 @@
     "Type": "Conference type",
     "Category": "Category",
     "Finished": "The conference is over",
-    "Countdown": "Countdown"
+    "Countdown": "Countdown",
+    "Weather" : "Weather in"
   },
   "Location": {
     "Name": "Name",

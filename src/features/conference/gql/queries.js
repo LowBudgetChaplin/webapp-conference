@@ -72,3 +72,32 @@ export const CONFERENCE_QUERY = gql`
   ${Fragments.type}
   ${Fragments.category}
 `
+
+export const USER_CONFERENCE_LIST_QUERY = gql`
+  query UserConferenceList($userEmail: String!) {
+    conferenceList(filters: { status: "Joined" }, userEmail: $userEmail) {
+      ...conference
+      speakers {
+        ...speaker
+      }
+      location {
+        ...location
+      }
+      type {
+        ...type
+      }
+      category {
+        ...category
+      }
+      status(userEmail: $userEmail) {
+        ...status
+      }
+    }
+  }
+  ${Fragments.conference}
+  ${Fragments.speaker}
+  ${Fragments.location}
+  ${Fragments.type}
+  ${Fragments.category}
+  ${Fragments.status}
+`

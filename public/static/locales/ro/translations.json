@@ -77,7 +77,8 @@
     "Type": "Tipul conferintei",
     "Category": "Categorie",
     "Finished": "Conferinta s-a terminat",
-    "Countdown" : "Conferinta incepe in"
+    "Countdown": "Conferinta incepe in",
+    "Weather": "Vremea in orasul"
   },
   "Location": {
     "Name": "Nume",

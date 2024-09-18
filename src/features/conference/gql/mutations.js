@@ -38,3 +38,13 @@ export const DELETE_CONFERENCE = gql`
     deleteConference(id: $id)
   }
 `
+
+export const UPDATE_RATING_MUTATION = gql`
+  mutation updateRating($speakerId: Int!, $rating: Float!) {
+    updateRating(speakerId: $speakerId, rating: $rating) {
+      id
+      name
+      rating
+    }
+  }
+`
