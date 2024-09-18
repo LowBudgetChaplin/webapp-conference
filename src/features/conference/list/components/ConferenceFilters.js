@@ -23,7 +23,7 @@ const ConferenceFilters = ({ filters, onApplyFilters, onSearch }) => {
   )
 
   const handleApplyClick = useCallback(() => onApplyFilters({ startDate, endDate }), [onApplyFilters, startDate, endDate])
-  const handleKeyPressed = useCallback(({ keyCode }) => keyCode === 13 && handleApplyClick(), [handleApplyClick])
+  // const handleKeyPressed = useCallback(({ keyCode }) => keyCode === 13 && handleApplyClick(), [handleApplyClick])
 
   const handleResetClick = useCallback(() => {
     const defaultFilters = generateDefaultFilters()

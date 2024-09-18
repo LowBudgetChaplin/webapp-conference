@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useLocation } from 'react-router-dom'
+import { useLocation} from 'react-router-dom'
 import { reduce } from 'ramda'
 import menuConfig from 'constants/menuConfig'
 import { emptyArray, mobileWidth } from 'utils/constants'
@@ -9,12 +9,14 @@ import { useMediaQuery } from 'react-responsive'
 import MobileHeader from './MobileHeader'
 import WebHeader from './WebHeader'
 
+
 const flatten = (arr, value) => arr.concat(value).concat(value.children ? flattenConfig(value.children) : emptyArray)
 const flattenConfig = config => reduce(flatten, emptyArray, config)
 
 function Header({ drawerOpen, handleDrawerToggle }) {
   const location = useLocation()
   const isMobile = useMediaQuery({ query: mobileWidth })
+
 
   const makeBrand = pathname => {
     var name
@@ -42,7 +44,7 @@ function Header({ drawerOpen, handleDrawerToggle }) {
         ) : (
           <WebHeader handleDrawerToggle={handleDrawerToggle} pathName={pathName} />
         )}
-      </Toolbar>
+      </Toolbar>  
     </AppBar>
   )
 }

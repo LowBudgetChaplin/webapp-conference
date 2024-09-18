@@ -15,7 +15,7 @@ const ConferenceItem = props => {
   const speaker = speakers.find(speaker => speaker.isMainSpeaker)
 
   const handleEdit = useCallback(() => navigate(`/conferences/${id}`), [navigate, id])
-  const seeConference = useCallback(() => navigate(`/conference/${id}`), [navigate, id])
+  // const seeConference = useCallback(() => navigate(`/conference/${id}`), [navigate, id])
 
   const title =
     email?.toUpperCase() === organizerEmail?.toUpperCase() ? (

@@ -5,7 +5,7 @@
 import { emptyString } from 'utils/constants'
 import { emailKey } from './cacheKeyFunctions'
 
-const emailValue = { email: 'serban.corodescu@totalsoft.ro' }
+const emailValue = { email: emptyString }
 
 export const defaults = {
   [emailKey]: emailValue

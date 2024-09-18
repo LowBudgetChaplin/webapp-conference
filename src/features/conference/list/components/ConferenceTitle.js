@@ -1,17 +1,15 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Card, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import { IconButton, Typography } from '@totalsoft/rocket-ui'
 import { emptyString } from 'utils/constants'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 
 const ConferenceTitle = props => {
   const { t } = useTranslation()
   const { title, onEdit, onDelete, id } = props
-  const navigate = useNavigate()
 
-  const seeConference = useCallback(() => navigate(`/conference/${id}`), [navigate, id])
+  // const seeConference = useCallback(() => navigate(`/conference/${id}`), [navigate, id])
 
   return (
     // <Card

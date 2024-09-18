@@ -1,50 +1,28 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
-import { Grid, Typography, Card, CardContent, Divider, Icon } from '@mui/material'
-import PropTypes from 'prop-types'
+import { Grid, Typography, Card, CardContent, Divider, Rating } from '@mui/material'
 import { AccessTime, LocationOn, CalendarToday, Person, Alarm } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
-import axios from 'axios'
-import SunIcon from '@mui/icons-material/WbSunny'
-import CloudIcon from '@mui/icons-material/Cloud'
-import Rating from '@mui/material/Rating'
-import { UPDATE_RATING_MUTATION } from '../gql/mutations'
+import { Button } from '@totalsoft/rocket-ui'
 import { CONFERENCE_QUERY } from '../gql/queries'
+import { UPDATE_CONFERENCE } from '../gql/mutations'
+import ConferenceWeatherPage from './ConferenceWeatherPage'
 
 const ConferenceDetails = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const { data } = useQuery(CONFERENCE_QUERY, {
     variables: { id: parseInt(id, 10), isNew: false }
   })
-  const [updateRating] = useMutation(UPDATE_RATING_MUTATION)
-  const [weatherData, setWeatherData] = useState(null)
+  const [updateConference] = useMutation(UPDATE_CONFERENCE)
   const { conference } = data || {}
   const { name, startDate, endDate, location, speakers } = conference || {}
   const { city } = location || {}
 
   const [timeLeft, setTimeLeft] = useState('')
   const [isConferenceOver, setIsConferenceOver] = useState(false)
-
-  const fetchData = async () => {
-    if (!location || !location.name) return
-
-    //process.env.WeatherAPI
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&units=metric&appid=e78e7e6c166fe48f5145ba410557cce1`
-      )
-      setWeatherData(response.data)
-      console.log(response.data)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [location])
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -72,16 +50,44 @@ const ConferenceDetails = () => {
   }, [startDate, t])
 
   const handleRatingChange = useCallback(
-    speakerId => (event, newValue) => {
-      updateRating({
-        variables: {
-          speakerId,
-          rating: newValue
+    speakerId => async (event, newValue) => {
+      try {
+        const updatedSpeakers = speakers.map(speaker => ({
+          ...speaker,
+          rating: speaker.id === speakerId ? newValue : speaker.rating
+        }))
+        console.log('ORICE', conference, updatedSpeakers)
+
+        const newConference = {
+          ...conference,
+          typeId: conference.type.id,
+          categoryId: conference.category.id,
+          location: {
+            ...conference.location,
+            cityId: conference.location.city.id,
+            countyId: conference.location.county.id,
+            countryId: conference.location.country.id
+          },
+          speakers: updatedSpeakers
         }
-      })
+        delete newConference.category
+        delete newConference.type
+        delete newConference.location.city
+        delete newConference.location.county
+        delete newConference.location.country
+        await updateConference({
+          variables: {
+            input: newConference
+          }
+        })
+      } catch (error) {
+        console.error(error)
+      }
     },
-    [updateRating]
+    [updateConference, conference, speakers]
   )
+
+  const goBackHandle = useCallback(() => navigate(`/conferences`), [navigate])
 
   return (
     <Grid container spacing={3}>
@@ -89,33 +95,33 @@ const ConferenceDetails = () => {
         <Typography variant='h4' align='center' style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 700, marginBottom: '20px' }}>
           {name}
         </Typography>
+
+        <Button
+          onClick={goBackHandle}
+          sx={{
+            position: 'fixed',
+            right: 20,
+            zIndex: 9999,
+            padding: '8px',
+            width: '60px',
+            height: '40px',
+            borderRadius: '10%',
+            backgroundColor: 'darkGray',
+            color: 'white',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease-in-out',
+            '&:hover': {
+              backgroundColor: 'orange'
+            }
+          }}
+        >
+          Go Back
+        </Button>
       </Grid>
       <Grid item xs={12} md={6}>
-        <Card>
-          <CardContent style={{ height: 400, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <Typography variant='h4' gutterBottom>
-              {t('Conference.Weather')} {city?.name || 'Not Specified'}
-            </Typography>
-            {weatherData ? (
-              <>
-                <Icon sx={{ fontSize: '100px', marginBottom: '30px' }}>
-                  {weatherData.weather[0].main === 'Clear' ? (
-                    <SunIcon sx={{ color: 'gold', fontSize: 'inherit' }} />
-                  ) : (
-                    <CloudIcon sx={{ color: 'gray', fontSize: 'inherit' }} />
-                  )}
-                </Icon>
-                <Typography variant='h4' style={{ fontSize: '5rem' }}>
-                  {weatherData.main.temp}°C
-                </Typography>
-                <Typography variant='h6'>{weatherData.weather[0].description}</Typography>
-              </>
-            ) : (
-              <Typography variant='body2'>Loading weather...</Typography>
-            )}
-          </CardContent>
-        </Card>
+        <ConferenceWeatherPage city={city} />
       </Grid>
+
       <Grid item xs={12} md={6}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
@@ -154,7 +160,6 @@ const ConferenceDetails = () => {
           <Grid item xs={12} md={6}>
             <Card>
               <CardContent style={{ minWidth: '400px' }}>
-                {' '}
                 <Typography variant='h6' gutterBottom style={{ display: 'flex', alignItems: 'center' }}>
                   <Alarm style={{ marginRight: 8 }} /> {t('Conference.Countdown')}
                 </Typography>
@@ -189,11 +194,10 @@ const ConferenceDetails = () => {
                       >
                         <Typography variant='body2'>{speaker.name}</Typography>
                         <Rating
-                          name={`rating-${speaker.id}`}
                           value={speaker.rating || 0}
                           precision={0.5}
                           onChange={handleRatingChange(speaker.id)}
-                          sx={{ color: 'gold', fontSize: '1.5rem' }}
+                          sx={{ color: 'gold', fontSize: '3rem' }}
                         />
                       </li>
                     ))}
@@ -205,10 +209,6 @@ const ConferenceDetails = () => {
       </Grid>
     </Grid>
   )
-}
-
-ConferenceDetails.propTypes = {
-  conference: PropTypes.object
 }
 
 export default ConferenceDetails
