@@ -66,6 +66,10 @@ const ConferenceListContainer = () => {
     [deleteConference]
   )
 
+  const handleJoin = useCallback(() => {
+    navigate('')
+  }, [navigate])
+
   const handleChangeAttendanceStatus = useCallback(
     (conferenceId, statusId) => () => {
       const input = {
@@ -95,10 +99,15 @@ const ConferenceListContainer = () => {
     return <FakeText lines={10} />
   }
 
+  
   return (
     <>
       <ConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} onSearch={handleSearch} />
-      <ConferenceList conferences={filteredConferences} onChangeAttendanceStatus={handleChangeAttendanceStatus} onDelete={handleDelete} />
+      <ConferenceList
+        conferences={filteredConferences}
+        onChangeAttendanceStatus={handleChangeAttendanceStatus}
+        onDelete={handleDelete}
+      />
     </>
   )
 }

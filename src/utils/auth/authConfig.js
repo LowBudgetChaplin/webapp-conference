@@ -1,9 +1,7 @@
 import { TokenRenewMode } from '@axa-fr/react-oidc'
 import { env } from 'utils/env'
 
-export const root = `${window.location.protocol}//${window.location.hostname}${
-  window.location.port ? `:${window.location.port}` : ''
-}`
+export const root = `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`
 const AUTH = {
   CALLBACK: '/authentication/callback',
   SILENT_CALLBACK: '/authentication/silent_callback'
@@ -17,8 +15,8 @@ const getAuthenticationConfiguration = () => {
     silent_redirect_uri: `${root}${AUTH.SILENT_CALLBACK}`,
     scope: 'openid profile ' + env.REACT_APP_IDENTITY_SCOPE,
     refresh_time_before_tokens_expiration_in_second: 40,
-    token_renew_mode: TokenRenewMode.access_token_invalid,
-    service_worker_relative_url: '/OidcServiceWorker.js'
+    token_renew_mode: TokenRenewMode.access_token_invalid
+    // service_worker_relative_url: '/OidcServiceWorker.js'
   }
 }
 

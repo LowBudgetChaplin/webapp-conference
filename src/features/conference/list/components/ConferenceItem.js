@@ -8,7 +8,7 @@ import { useEmail } from 'hooks/useEmail'
 import { useNavigate } from 'react-router-dom'
 
 const ConferenceItem = props => {
-  const { conference, onChangeAttendanceStatus, onDelete } = props
+  const { conference, onChangeAttendanceStatus, onDelete, onJoin } = props
   const navigate = useNavigate()
   const [email] = useEmail()
   const { name, organizerEmail, speakers, location, id } = conference
@@ -16,27 +16,19 @@ const ConferenceItem = props => {
 
   const handleEdit = useCallback(() => navigate(`/conferences/${id}`), [navigate, id])
   // const seeConference = useCallback(() => navigate(`/conference/${id}`), [navigate, id])
-
+  const handleJoin = useCallback(() => {
+    navigate(`/meeting/${name}`)
+  }, [navigate, name])
   const title =
     email?.toUpperCase() === organizerEmail?.toUpperCase() ? (
-      <ConferenceTitle title={name} onEdit={handleEdit} onDelete={onDelete} id={id} />
+      <ConferenceTitle title={name} onEdit={handleEdit} onDelete={onDelete} id={id} onJoin={handleJoin} />
     ) : (
       name
     )
 
   return (
-    <Card
-      title={title}
-      subheader={<ConferenceSubtitle speaker={speaker} location={location} conference={conference} />}
-      // onClick={seeConference}
-      // sx={{
-      //   cursor: 'pointer',
-      //   '&:hover': {
-      //     backgroundColor: 'rgba(0, 0, 0, 0.04)'
-      //   }
-      // }}
-    >
-      <ConferenceContent conference={conference} onChangeAttendanceStatus={onChangeAttendanceStatus}/>
+    <Card title={title} subheader={<ConferenceSubtitle speaker={speaker} location={location} conference={conference} />}>
+      <ConferenceContent conference={conference} onChangeAttendanceStatus={onChangeAttendanceStatus} />
     </Card>
   )
 }
@@ -44,7 +36,8 @@ const ConferenceItem = props => {
 ConferenceItem.propTypes = {
   conference: PropTypes.object.isRequired,
   onChangeAttendanceStatus: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  onJoin: PropTypes.func
 }
 
 export default ConferenceItem

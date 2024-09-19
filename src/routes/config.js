@@ -5,14 +5,14 @@ import { Forbidden, NotFound } from '@totalsoft/rocket-ui'
 import Welcome from 'features/welcome/Welcome'
 import ConferenceListContainer from 'features/conference/list/components/ConferenceListContainer'
 import ConferenceContainer from 'features/conference/edit/components/ConferenceContainer'
-import UserConferenceContainer from 'features/conference/userConference/UserConferenceContainer'
 import ConferenceDetails from 'features/conference/conferencePage/ConferenceDetails'
+import MeetingPage from 'features/conference/conferencePage/MeetingPage'
 
 const routes = [
   { path: '/', element: <Navigate replace to='/welcome' /> },
   { path: '/conferences', element: <ConferenceListContainer /> },
   { path: '/conferences/:id', element: <ConferenceContainer /> },
-  { path: '/userConferences', element: <UserConferenceContainer /> },
+  { path: '/meeting/:conferenceName', element: <MeetingPage /> },
   { path: '/conference/:id', element: <ConferenceDetails /> },
   { path: '/welcome', element: <CustomRoute isPrivate={false} component={Welcome} /> },
   { path: '/forbidden', element: <Forbidden /> },

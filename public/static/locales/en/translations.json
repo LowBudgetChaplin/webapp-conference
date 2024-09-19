@@ -70,6 +70,7 @@
     "Edit": "Edit",
     "Delete": "Delete",
     "SearchBar": "Search for a conference",
+    "Meeting": "Join meeting",
     "Filters": {
       "StartDate": "Start date",
       "EndDate": "End date"
@@ -86,7 +87,7 @@
     "Category": "Category",
     "Finished": "The conference is over",
     "Countdown": "Countdown",
-    "Weather" : "Weather in"
+    "Weather": "Weather in"
   },
   "Location": {
     "Name": "Name",

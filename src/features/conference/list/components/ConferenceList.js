@@ -21,7 +21,7 @@ ConferenceList.propTypes = {
   conferences: PropTypes.array,
   onChangeAttendanceStatus: PropTypes.func,
   onDelete: PropTypes.func,
-  search: PropTypes.string
+  search: PropTypes.string,
 }
 
 export default ConferenceList
