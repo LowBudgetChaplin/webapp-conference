@@ -26,14 +26,16 @@ const ConferenceTitle = props => {
           lg={3}
           sx={{
             cursor: 'pointer',
+            marginTop: 1.5,
             '&:hover': {
               color: 'black',
               alignItems: 'center',
               transform: 'scale(1.1)'
-            }
+            },
+            fontSize: 'medium'
           }}
         >
-          <VideocamIcon />
+          <VideocamIcon fontSize='small' />
         </IconButton>
         <Grid item>
           <IconButton type='edit' onClick={onEdit} title={t('Conferences.Edit')} size='tiny' />
