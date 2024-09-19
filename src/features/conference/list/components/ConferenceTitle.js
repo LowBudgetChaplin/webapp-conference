@@ -29,7 +29,6 @@ const ConferenceTitle = props => {
             marginTop: 1.5,
             '&:hover': {
               color: 'black',
-              margin: '0 8px',
               alignItems: 'center',
               transform: 'scale(1.1)'
             },

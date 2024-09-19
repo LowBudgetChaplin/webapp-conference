@@ -106,12 +106,12 @@ const ConferenceDetails = () => {
             width: '60px',
             height: '40px',
             borderRadius: '10%',
-            backgroundColor: 'darkGray',
+            backgroundColor: 'black',
             color: 'white',
             cursor: 'pointer',
             transition: 'all 0.3s ease-in-out',
             '&:hover': {
-              backgroundColor: 'orange'
+              backgroundColor: 'red'
             }
           }}
         >
