@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Icon } from '@mui/material'
+import { Grid } from '@mui/material'
 import { IconButton, Typography } from '@totalsoft/rocket-ui'
 import { emptyString } from 'utils/constants'
 import { useTranslation } from 'react-i18next'
@@ -29,6 +29,7 @@ const ConferenceTitle = props => {
             marginTop: 1.5,
             '&:hover': {
               color: 'black',
+              margin: '0 8px',
               alignItems: 'center',
               transform: 'scale(1.1)'
             },

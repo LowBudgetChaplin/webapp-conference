@@ -206,6 +206,7 @@ const ConferenceDetails = () => {
             </Card>
           </Grid>
         </Grid>
+        <Grid item xs={12}></Grid>
       </Grid>
     </Grid>
   )

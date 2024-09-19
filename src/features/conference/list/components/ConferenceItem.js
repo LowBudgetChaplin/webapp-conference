@@ -8,14 +8,13 @@ import { useEmail } from 'hooks/useEmail'
 import { useNavigate } from 'react-router-dom'
 
 const ConferenceItem = props => {
-  const { conference, onChangeAttendanceStatus, onDelete, onJoin } = props
+  const { conference, onChangeAttendanceStatus, onDelete } = props
   const navigate = useNavigate()
   const [email] = useEmail()
   const { name, organizerEmail, speakers, location, id } = conference
   const speaker = speakers.find(speaker => speaker.isMainSpeaker)
 
   const handleEdit = useCallback(() => navigate(`/conferences/${id}`), [navigate, id])
-  // const seeConference = useCallback(() => navigate(`/conference/${id}`), [navigate, id])
   const handleJoin = useCallback(() => {
     navigate(`/meeting/${name}`)
   }, [navigate, name])
